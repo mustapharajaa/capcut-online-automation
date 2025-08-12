@@ -1,0 +1,24 @@
+{
+  "name": "capcut-web-automator",
+  "version": "1.0.0",
+  "description": "A Node.js app to automate CapCut Web using Puppeteer.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "capcut",
+    "puppeteer",
+    "automation"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "express": "^4.18.2",
+    "multer": "^2.0.2",
+    "puppeteer": "^21.3.8",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
+  }
+}

@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Video Background Remover Online</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            background-color: white;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .header {
+            padding: 20px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .logo .highlight {
+            color: #007bff;
+        }
+        
+        .main-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            color: #333;
+            margin-bottom: 15px;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+        
+        .hero-subtitle {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 35px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .input-section {
+            margin-bottom: 20px;
+        }
+        
+        .input-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-button.active {
+            color: #007bff;
+            border-bottom-color: #007bff;
+        }
+        
+        .tab-button:hover {
+            color: #007bff;
+        }
+        
+        .input-content {
+            display: none;
+        }
+        
+        .input-content.active {
+            display: block;
+        }
+        
+        .input-label {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .main-input {
+            width: 100%;
+            max-width: 500px;
+            padding: 15px 20px;
+            font-size: 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background-color: white;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .main-input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+        }
+        
+        .main-input::placeholder {
+            color: #999;
+            text-align: center;
+        }
+        
+        .convert-button {
+            background: #333;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .convert-button:hover {
+            background: #555;
+            transform: translateY(-1px);
+        }
+        
+        .convert-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .youtube-button {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .youtube-button:hover {
+            background: #cc0000;
+            transform: translateY(-1px);
+        }
+        
+        .options-section {
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .option-checkbox {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .feature-description {
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .how-to-section {
+            margin: 80px 0;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 50px;
+        }
+        
+        .step {
+            display: flex;
+            align-items: flex-start;
+            margin: 40px 0;
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .step-number {
+            background: #87ceeb;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        
+        .step-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .step-content p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+        
+        /* Inline Progress Bars */
+        .inline-progress {
+            margin-top: 15px;
+            text-align: center;
+        }
+        
+        .inline-progress-bar {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            height: 28px;
+            background-color: #e9ecef;
+            border-radius: 14px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        .inline-progress-fill {
+            height: 100%;
+            background-color: #007bff;
+            width: 0%;
+            border-radius: 14px;
+            transition: width 0.3s ease;
+        }
+        
+        .inline-progress-text {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+            z-index: 2;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            transition: right 0.3s ease;
+        }
+        
+        /* Main Progress Bar - Same style as inline */
+        .main-progress-bar {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            height: 28px;
+            background-color: #e9ecef;
+            border-radius: 14px;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+        
+        .main-progress-fill {
+            height: 100%;
+            background-color: #007bff;
+            width: 0%;
+            border-radius: 14px;
+            transition: width 0.3s ease;
+        }
+        
+        .main-progress-text {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+            z-index: 2;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            transition: right 0.3s ease;
+        }
+        
+        .faq-section {
+            margin: 80px 0;
+            text-align: center;
+        }
+        
+        .faq-item {
+            text-align: left;
+            margin: 30px 0;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .faq-item h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .faq-item p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+        
+        .login-button {
+            background: transparent;
+            color: #007bff;
+            border: 1px solid #007bff;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .login-button:hover {
+            background: #007bff;
+            color: white;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 40px;
+            border: none;
+            width: 90%;
+            max-width: 450px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .modal-input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+        }
+
+        .modal-button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 15px;
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,123,255,0.3);
+        }
+
+        .status-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #loginStatus {
+            font-size: 14px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        #loginStatus.logged-out {
+            color: #856404;
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+        }
+
+        #loginStatus.logged-in {
+            color: #155724;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+        }
+
+        #loginStatus.checking {
+            color: #0c5460;
+            background-color: #d1ecf1;
+            border: 1px solid #bee5eb;
+        }
+
+        /* Progress Display Styles */
+        .progress-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid #e9ecef;
+            display: none;
+            margin-top: 30px;
+        }
+        
+        .progress-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .progress-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .progress-bar-container {
+            background-color: #e9ecef;
+            border-radius: 25px;
+            height: 8px;
+            position: relative;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #007bff 0%, #0056b3 100%);
+            height: 100%;
+            border-radius: 25px;
+            transition: width 0.5s ease;
+            position: relative;
+            width: 0%;
+        }
+        
+        .progress-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: #007bff;
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        .progress-log {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 14px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .progress-item {
+            padding: 12px 16px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+            background: white;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            border-left: 4px solid #4CAF50;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        .progress-item.success {
+            border-left-color: #28a745;
+            background: #f8fff9;
+            color: #155724;
+        }
+        
+        .progress-item.info {
+            border-left-color: #17a2b8;
+            background: #f6fbfc;
+            color: #0c5460;
+        }
+        
+        .progress-item.warning {
+            border-left-color: #ffc107;
+            background: #fffdf5;
+            color: #856404;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* Notification styles */
+        #notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #007bff;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s, top 0.5s;
+            font-size: 1.1em;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        #notification.show {
+            opacity: 1;
+            top: 50px;
+        }
+
+        #notification.error {
+            background-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div id="notification"></div>
+    
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">Free Video <span class="highlight">Background Remover</span></div>
+            <div class="status-container">
+                <span id="loginStatus"></span>
+                <button id="loginBtn" class="login-button">Login</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Hero Section -->
+        <h1 class="hero-title">Free Video Background<br>Remover</h1>
+        <p class="hero-subtitle">Remove the background from your video without installing any software.</p>
+        
+        <!-- Input Method Tabs -->
+        <div class="input-tabs">
+            <button class="tab-button active" id="uploadTab">Upload File</button>
+            <button class="tab-button" id="youtubeTab">YouTube URL</button>
+        </div>
+        
+        <!-- Main Input Section -->
+        <div class="input-section">
+            <!-- File Upload Input -->
+            <div id="uploadContent" class="input-content active">
+                <label class="input-label">Select video file from your device</label>
+                <input type="file" id="videoFileInput" accept="video/*" class="main-input" style="padding: 12px; text-align: left;">
+                
+                <div class="option-checkbox">
+                    <input type="checkbox" id="cutOptionFile" checked>
+                    <label for="cutOptionFile">Remove Background</label>
+                </div>
+                
+                <button id="uploadBtn" class="convert-button">Process Video</button>
+                
+                <!-- Inline Progress for Upload -->
+                <div id="uploadProgress" class="inline-progress" style="display: none;">
+                    <div class="inline-progress-bar">
+                        <div id="uploadProgressBar" class="inline-progress-fill"></div>
+                        <div id="uploadProgressText" class="inline-progress-text">0%</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- YouTube Input -->
+            <div id="youtubeContent" class="input-content">
+                <label class="input-label">Video URL (http:// or https://)</label>
+                <input type="url" id="youtubeUrlInput" placeholder="Enter YouTube URL" class="main-input">
+                
+                <div class="option-checkbox">
+                    <input type="checkbox" id="cutOption" checked>
+                    <label for="cutOption">Remove Background</label>
+                </div>
+                
+                <button id="youtubeDownloadBtn" class="convert-button">Convert</button>
+                
+                <!-- Inline Progress for YouTube -->
+                <div id="youtubeProgress" class="inline-progress" style="display: none;">
+                    <div class="inline-progress-bar">
+                        <div id="youtubeProgressBar" class="inline-progress-fill"></div>
+                        <div id="youtubeProgressText" class="inline-progress-text">0%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Features Section -->
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🆓</div>
+                <div class="feature-title">Free</div>
+                <div class="feature-description">100% free tool to remove backgrounds from your videos into high-quality MP4.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🚫</div>
+                <div class="feature-title">No Limit</div>
+                <div class="feature-description">No request limits or restrictions - process videos online and convert your own files 24/7.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎭</div>
+                <div class="feature-title">Remove Background</div>
+                <div class="feature-description">Advanced AI technology automatically removes backgrounds from your videos with precision and quality.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-title">Easy</div>
+                <div class="feature-description">Get MP4 in one click - the conversion process takes seconds and supports videos up to 2 hours.</div>
+            </div>
+        </div>
+        
+        <!-- How To Section -->
+        <div class="how-to-section">
+            <h2 class="section-title">How to remove video background?</h2>
+            
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Choose Input</h3>
+                    <p>Select either "Upload File" to process a local video file, or "YouTube URL" to process a video from YouTube. Maximum video length is 2 hours.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Upload or Paste</h3>
+                    <p>Either upload your video file directly from your device, or paste the YouTube URL including the http:// or https:// prefix.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Process</h3>
+                    <p>Click "Process Video" or "Convert" to start the background removal process. The "Remove Background" option is checked by default.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Download</h3>
+                    <p>The background removal process takes a few minutes. Once completed, you can download the processed MP4 video with transparent background to your device.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h2 class="section-title">Frequently asked questions</h2>
+            
+            <div class="faq-item">
+                <h3>What is Video Background Remover?</h3>
+                <p>Video Background Remover is a free online tool that automatically removes backgrounds from videos. It works with both uploaded video files and YouTube URLs, using advanced AI to create transparent backgrounds.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>What video formats are supported?</h3>
+                <p>The tool supports most common video formats including MP4, AVI, MOV, and others. The output is always provided as a high-quality MP4 file with transparent background.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>What length of videos does the tool support?</h3>
+                <p>Maximum video length is 2 hours for both uploaded files and YouTube videos.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>Can I process YouTube videos?</h3>
+                <p>Yes! Simply paste any YouTube URL and the tool will download the video, remove the background, and provide you with the processed result.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>How long does the background removal process take?</h3>
+                <p>Processing time depends on video length and complexity. Most videos are processed within 5-15 minutes. You'll see real-time progress updates during processing.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>Is it legal to remove video backgrounds?</h3>
+                <p>The use of third party works protected by copyrights without the consent of the copyright holder is generally allowed for personal and non-commercial use under fair use provisions. If such action is against the law in force in your country, you can use the converter only to process your own materials. We do not accept illegal copying, duplication or distribution of copyrighted content.</p>
+            </div>
+        </div>
+        
+        <!-- Progress Display -->
+        <div id="progressContainer" class="progress-container" style="display: none;">
+            <div class="progress-header">
+                <div class="progress-title">Processing Your Video</div>
+                <div class="main-progress-bar">
+                    <div id="progressBar" class="main-progress-fill"></div>
+                    <div id="progressText" class="main-progress-text">0%</div>
+                </div>
+            </div>
+            <div id="progressLog" class="progress-log"></div>
+        </div>
+    </div>
+    <!-- The Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>CapCut Login</h2>
+            <form id="loginForm">
+                <input type="email" id="email" name="email" placeholder="Email" required>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+                <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+                    <button type="button" id="saveBtn" class="modal-button">Save Details</button>
+                    <button type="submit" class="modal-button">Log In</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Video Completion Modal -->
+    <div id="completionModal" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <span class="close" onclick="closeCompletionModal()">&times;</span>
+            <div style="text-align: center; padding: 20px;">
+                <div style="font-size: 2em; color: #4CAF50; margin-bottom: 20px;">
+                    🎉 Video Processing Complete!
+                </div>
+                <div style="font-size: 1.2em; margin-bottom: 20px; color: #333;">
+                    Your video background has been successfully removed
+                </div>
+                
+                <!-- Video Preview -->
+                <div id="videoPreviewContainer" style="margin: 20px 0; background: #000; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+                    <video id="completionVideoPlayer" controls style="width: 100%; max-width: 600px; height: auto; display: block;">
+                        <source id="completionVideoSource" src="" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                
+                <div id="completionVideoInfo" style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 20px 0; font-family: monospace; word-break: break-all;">
+                    <!-- Video info will be inserted here -->
+                </div>
+                <div style="margin-top: 30px;">
+                    <button id="downloadVideoBtn" onclick="downloadCompletedVideo()" style="background: #007bff; color: white; padding: 12px 30px; border: none; border-radius: 6px; font-size: 16px; font-weight: 600; cursor: pointer; margin-right: 15px;">
+                        📥 Download Video
+                    </button>
+                    <button id="openFolderBtn" onclick="openVideoFolder()" style="background: #28a745; color: white; padding: 12px 30px; border: none; border-radius: 6px; font-size: 16px; font-weight: 600; cursor: pointer;">
+                        📁 Open Folder
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Element References ---
+            const loginButton = document.getElementById('loginBtn');
+            const modal = document.getElementById('loginModal');
+            const closeButton = document.querySelector('.close-btn');
+            const loginForm = document.getElementById('loginForm');
+            const saveBtn = document.getElementById('saveBtn');
+            
+            // Tab switching elements
+            const youtubeTab = document.getElementById('youtubeTab');
+            const uploadTab = document.getElementById('uploadTab');
+            const youtubeContent = document.getElementById('youtubeContent');
+            const uploadContent = document.getElementById('uploadContent');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const loginStatusEl = document.getElementById('loginStatus');
+            const uploadBtn = document.getElementById('uploadBtn');
+            const videoFileInput = document.getElementById('videoFileInput');
+            const notification = document.getElementById('notification');
+
+            // --- Tab Switching Functionality ---
+            function switchTab(activeTab, activeContent) {
+                // Remove active class from all tabs and content
+                document.querySelectorAll('.tab-button').forEach(tab => tab.classList.remove('active'));
+                document.querySelectorAll('.input-content').forEach(content => content.classList.remove('active'));
+                
+                // Add active class to selected tab and content
+                activeTab.classList.add('active');
+                activeContent.classList.add('active');
+            }
+            
+            // Tab event listeners
+            if (youtubeTab && uploadTab && youtubeContent && uploadContent) {
+                uploadTab.addEventListener('click', () => {
+                    switchTab(uploadTab, uploadContent);
+                });
+                
+                youtubeTab.addEventListener('click', () => {
+                    switchTab(youtubeTab, youtubeContent);
+                });
+            }
+
+            // --- Notification Function ---
+            function showNotification(message, isError = false) {
+                if (!notification) return;
+                notification.textContent = message;
+                notification.className = 'show';
+                if (isError) {
+                    notification.classList.add('error');
+                }
+                setTimeout(() => {
+                    notification.className = notification.className.replace('show', '');
+                    if (isError) {
+                        notification.classList.remove('error');
+                    }
+                }, 3000);
+            }
+
+            // --- Login Status Check ---
+            async function checkAndDisplayStatus() {
+                if (!loginStatusEl) return;
+                loginStatusEl.textContent = 'Status: Checking...';
+                loginStatusEl.className = 'checking';
+                try {
+                    const response = await fetch('/status');
+                    const data = await response.json();
+                    if (data.loggedIn) {
+                        loginStatusEl.textContent = 'Status: Logged In';
+                        loginStatusEl.className = 'logged-in';
+                    } else {
+                        loginStatusEl.textContent = 'Status: Not Logged In';
+                        loginStatusEl.className = 'logged-out';
+                    }
+                } catch (error) {
+                    console.error('Error fetching login status:', error);
+                    loginStatusEl.textContent = 'Status: Error';
+                    loginStatusEl.className = 'logged-out';
+                }
+            }
+
+            // --- Progress Display Functions ---
+            let currentProgress = 0;
+            const progressSteps = [
+                'Starting automation...',
+                'Uploading video...',
+                'Adding to timeline...',
+                'Moving to Track 2...',
+                'Resizing video...',
+                'Splitting clip...',
+                'Removing background...',
+                'Exporting video...',
+                'Downloading result...',
+                'Automation complete!'
+            ];
+            
+            function showProgressContainer() {
+                const progressContainer = document.getElementById('progressContainer');
+                const progressLog = document.getElementById('progressLog');
+                const progressBar = document.getElementById('progressBar');
+                const progressText = document.getElementById('progressText');
+                
+                if (progressContainer && progressLog) {
+                    progressContainer.style.display = 'block';
+                    progressLog.innerHTML = ''; // Clear previous logs
+                    progressLog.scrollTop = progressLog.scrollHeight;
+                    
+                    // Reset progress bar
+                    currentProgress = 0;
+                    if (progressBar) progressBar.style.width = '0%';
+                    if (progressText) progressText.textContent = '0%';
+                }
+            }
+            
+            function updateProgressBar(percentage) {
+                const progressBar = document.getElementById('progressBar');
+                const progressText = document.getElementById('progressText');
+                
+                if (progressBar && progressText) {
+                    progressBar.style.width = percentage + '%';
+                    progressText.textContent = Math.round(percentage) + '%';
+                    
+                    // Position text at the right edge of the filled area
+                    const progressBarWidth = progressBar.parentElement.offsetWidth || 400;
+                    const fillWidth = (percentage / 100) * progressBarWidth;
+                    const rightPosition = progressBarWidth - fillWidth + 8;
+                    progressText.style.right = rightPosition + 'px';
+                }
+            }
+            
+            function addProgressItem(message, type = 'info') {
+                const progressLog = document.getElementById('progressLog');
+                if (progressLog) {
+                    const item = document.createElement('div');
+                    item.className = `progress-item ${type}`;
+                    item.textContent = `${new Date().toLocaleTimeString()} - ${message}`;
+                    progressLog.appendChild(item);
+                    progressLog.scrollTop = progressLog.scrollHeight;
+                    
+                    // Update progress bar based on message content
+                    updateProgressBasedOnMessage(message);
+                }
+            }
+            
+            function isVerboseMessage(message) {
+                // Filter out detailed step messages - keep only essential progress
+                const verbosePatterns = [
+                    'Starting CapCut automation pipeline',
+                    'Launching browser for automation pipeline',
+                    'Page loaded successfully',
+                    'Starting upload process for',
+                    'Video uploaded and transcoded',
+                    'SUCCESS: Video',
+                    'uploaded and transcoded',
+                    'Adding video to timeline',
+                    'Moving to Track 2',
+                    'Clicking video cutout button',
+                    'Updated editor status',
+                    'Editor tab closed',
+                    'Browser ready for next automation',
+                    'Status marker created',
+                    'Updated video status'
+                ];
+                
+                return verbosePatterns.some(pattern => 
+                    message.toLowerCase().includes(pattern.toLowerCase())
+                );
+            }
+            
+            function updateProgressBasedOnMessage(message) {
+                // Map common automation messages to progress percentages
+                const progressMap = {
+                    'Starting': 5,
+                    'upload': 15,
+                    'timeline': 25,
+                    'Track 2': 35,
+                    'resize': 45,
+                    'split': 55,
+                    'background': 70,
+                    'export': 85,
+                    'download': 95,
+                    'completed': 100,
+                    'DOWNLOADED': 100
+                };
+                
+                // Find matching keyword and update progress
+                for (const [keyword, percentage] of Object.entries(progressMap)) {
+                    if (message.toLowerCase().includes(keyword.toLowerCase())) {
+                        if (percentage > currentProgress) {
+                            currentProgress = percentage;
+                            updateProgressBar(percentage);
+                            
+                            // Also update inline progress bars
+                            updateInlineProgressBars(percentage);
+                        }
+                        break;
+                    }
+                }
+            }
+            
+            function updateInlineProgressBars(percentage) {
+                // Update upload inline progress bar
+                const uploadProgressBar = document.getElementById('uploadProgressBar');
+                const uploadProgressText = document.getElementById('uploadProgressText');
+                if (uploadProgressBar && uploadProgressText) {
+                    uploadProgressBar.style.width = percentage + '%';
+                    uploadProgressText.textContent = Math.round(percentage) + '%';
+                    
+                    // Position text at the right edge of the filled area
+                    const progressBarWidth = uploadProgressBar.parentElement.offsetWidth || 400;
+                    const fillWidth = (percentage / 100) * progressBarWidth;
+                    const rightPosition = progressBarWidth - fillWidth + 8;
+                    uploadProgressText.style.right = rightPosition + 'px';
+                }
+                
+                // Update YouTube inline progress bar
+                const youtubeProgressBar = document.getElementById('youtubeProgressBar');
+                const youtubeProgressText = document.getElementById('youtubeProgressText');
+                if (youtubeProgressBar && youtubeProgressText) {
+                    youtubeProgressBar.style.width = percentage + '%';
+                    youtubeProgressText.textContent = Math.round(percentage) + '%';
+                    
+                    // Position text at the right edge of the filled area
+                    const progressBarWidth = youtubeProgressBar.parentElement.offsetWidth || 400;
+                    const fillWidth = (percentage / 100) * progressBarWidth;
+                    const rightPosition = progressBarWidth - fillWidth + 8;
+                    youtubeProgressText.style.right = rightPosition + 'px';
+                }
+            }
+            
+            function showFinalVideo(filePath) {
+                const progressLog = document.getElementById('progressLog');
+                if (progressLog) {
+                    const videoItem = document.createElement('div');
+                    videoItem.className = 'progress-item success';
+                    videoItem.style.cssText = 'padding: 15px; margin: 10px 0; border: 2px solid #4CAF50; border-radius: 8px; background: rgba(76, 175, 80, 0.1);';
+                    
+                    const fileName = filePath.split('\\').pop() || filePath.split('/').pop();
+                    
+                    videoItem.innerHTML = `
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.2em; font-weight: bold; color: #4CAF50; margin-bottom: 10px;">
+                                🎬 FINAL VIDEO READY!
+                            </div>
+                            <div style="background: rgba(0,0,0,0.1); padding: 8px; border-radius: 4px; margin: 8px 0; font-family: monospace; word-break: break-all;">
+                                ${filePath}
+                            </div>
+                            <div style="margin-top: 10px;">
+                                <strong>Filename:</strong> ${fileName}
+                            </div>
+                        </div>
+                    `;
+                    
+                    progressLog.appendChild(videoItem);
+                    progressLog.scrollTop = progressLog.scrollHeight;
+                }
+            }
+            
+            // Server-Sent Events for Progress Updates
+            function connectToProgressStream() {
+                const eventSource = new EventSource('/progress');
+                
+                eventSource.onmessage = function(event) {
+                    try {
+                        const data = JSON.parse(event.data);
+                        if (!data.message) return;
+
+                        // --- 1. Check for Filed Status ---
+                        if (data.message.includes('Video status updated to "filed"')) {
+                            setProgressFiled();
+                            setTimeout(() => eventSource.close(), 1000);
+                            return;
+                        }
+
+                        // --- 2. Check for Failure ---
+                        const failureKeywords = ['FAILED:', '❌', 'Automation pipeline failed', 'Pipeline error:', 'No element found for selector:', 'Dynamic search failed'];
+                        const isFailure = failureKeywords.some(kw => data.message.includes(kw));
+
+                        if (isFailure) {
+                            setProgressFailed(data.message);
+                            setTimeout(() => eventSource.close(), 1000);
+                            return;
+                        }
+
+                        // --- 2. Check for Completion ---
+                        const completionKeywords = ['DOWNLOADED:', 'completed:', 'FINAL VIDEO READY:'];
+                        const completionLine = completionKeywords.find(kw => data.message.includes(kw));
+
+                        if (completionLine) {
+                            const filePath = data.message.split(completionLine)[1].trim();
+                            updateProgressBar(100);
+                            updateInlineProgressBars(100);
+                            showCompletionModal(filePath || null);
+                            addProgressItem('✅ Automation complete! Your video is ready.', 'success');
+                            setTimeout(() => eventSource.close(), 1000);
+                            return;
+                        }
+
+                        // --- 3. Handle Regular Progress Updates ---
+                        // Filter out verbose messages before displaying
+                        if (!isVerboseMessage(data.message)) {
+                            const messageType = data.message.includes('✅') ? 'success' : 'info';
+                            addProgressItem(data.message, messageType);
+                        }
+                        
+                        // Always update the progress bar based on the message
+                        updateProgressBasedOnMessage(data.message);
+
+                    } catch (error) {
+                        console.error('Error parsing progress data:', error);
+                    }
+                };
+                
+                eventSource.onerror = function(error) {
+                    console.error('Progress stream error:', error);
+                    eventSource.close();
+                };
+
+                return eventSource;
+            }
+
+            function setProgressFiled() {
+                // Update main progress bar to blue (same as progress bar color)
+                const mainProgressBarFill = document.getElementById('mainProgressBarFill');
+                const mainProgressBarText = document.getElementById('mainProgressBarText');
+                if (mainProgressBarFill) {
+                    mainProgressBarFill.style.width = '100%';
+                    mainProgressBarFill.style.backgroundColor = '#007bff'; // Blue for filed
+                }
+                if (mainProgressBarText) {
+                    mainProgressBarText.textContent = 'Filed';
+                }
+
+                // Update specific inline progress bars by ID
+                const uploadProgressFill = document.getElementById('uploadProgressFill');
+                const uploadProgressText = document.getElementById('uploadProgressText');
+                const convertProgressFill = document.getElementById('convertProgressFill');
+                const convertProgressText = document.getElementById('convertProgressText');
+
+                if (uploadProgressFill) {
+                    uploadProgressFill.style.width = '100%';
+                    uploadProgressFill.style.backgroundColor = '#007bff'; // Blue for filed
+                }
+                if (uploadProgressText) {
+                    uploadProgressText.textContent = 'Filed';
+                }
+                if (convertProgressFill) {
+                    convertProgressFill.style.width = '100%';
+                    convertProgressFill.style.backgroundColor = '#007bff'; // Blue for filed
+                }
+                if (convertProgressText) {
+                    convertProgressText.textContent = 'Filed';
+                }
+
+                // Also update any generic inline progress bars
+                document.querySelectorAll('.inline-progress-bar-fill').forEach(bar => {
+                    bar.style.width = '100%';
+                    bar.style.backgroundColor = '#007bff'; // Blue for filed
+                });
+                document.querySelectorAll('.inline-progress-bar-text').forEach(text => {
+                    text.textContent = 'Filed';
+                });
+
+                // Add the filed status to the log
+                addProgressItem('📁 Video filed - background removal completed', 'info');
+            }
+
+            function setProgressFailed(errorMessage = 'An unknown error occurred.') {
+                // Update main progress bar
+                const mainProgressBarFill = document.getElementById('mainProgressBarFill');
+                const mainProgressBarText = document.getElementById('mainProgressBarText');
+                if (mainProgressBarFill) {
+                    mainProgressBarFill.style.width = '100%';
+                    mainProgressBarFill.style.backgroundColor = '#dc3545'; // Red for failure
+                }
+                if (mainProgressBarText) {
+                    mainProgressBarText.textContent = 'Failed';
+                }
+
+                // Update specific inline progress bars by ID
+                const uploadProgressFill = document.getElementById('uploadProgressFill');
+                const uploadProgressText = document.getElementById('uploadProgressText');
+                const convertProgressFill = document.getElementById('convertProgressFill');
+                const convertProgressText = document.getElementById('convertProgressText');
+
+                if (uploadProgressFill) {
+                    uploadProgressFill.style.width = '100%';
+                    uploadProgressFill.style.backgroundColor = '#dc3545';
+                }
+                if (uploadProgressText) {
+                    uploadProgressText.textContent = 'Failed';
+                }
+                if (convertProgressFill) {
+                    convertProgressFill.style.width = '100%';
+                    convertProgressFill.style.backgroundColor = '#dc3545';
+                }
+                if (convertProgressText) {
+                    convertProgressText.textContent = 'Failed';
+                }
+
+                // Also update any generic inline progress bars
+                document.querySelectorAll('.inline-progress-bar-fill').forEach(bar => {
+                    bar.style.width = '100%';
+                    bar.style.backgroundColor = '#dc3545';
+                });
+                document.querySelectorAll('.inline-progress-bar-text').forEach(text => {
+                    text.textContent = 'Failed';
+                });
+
+                // Add the specific error to the log, ensuring it's not filtered
+                addProgressItem(`❌ ${errorMessage}`, 'error');
+            }
+
+            function showCompletionModal(videoPath = null) {
+                const modal = document.getElementById('completionModal');
+                const videoSource = document.getElementById('completionVideoSource');
+                const videoPlayer = document.getElementById('completionVideoPlayer');
+                const videoInfo = document.getElementById('completionVideoInfo');
+                const downloadBtn = document.getElementById('downloadVideoBtn');
+                const openFolderBtn = document.getElementById('openFolderBtn');
+
+                if (!modal || !videoSource || !videoPlayer || !videoInfo || !downloadBtn || !openFolderBtn) {
+                    console.error('Completion modal elements not found!');
+                    return;
+                }
+
+                if (videoPath) {
+                    const fileName = videoPath.split('\\').pop().split('/').pop();
+                    console.log('Showing completion modal for:', fileName);
+
+                    // Set video source and info
+                    videoSource.src = `/downloads/${fileName}`;
+                    videoInfo.textContent = `File: ${fileName}`;
+                    videoPlayer.style.display = 'block';
+
+                    // Set actions for buttons
+                    downloadBtn.style.display = 'inline-block';
+                    openFolderBtn.style.display = 'inline-block';
+                    downloadBtn.onclick = () => window.location.href = `/downloads/${fileName}`;
+                    openFolderBtn.onclick = () => {
+                        fetch(`/open-folder?path=${encodeURIComponent(videoPath)}`)
+                            .then(response => {
+                                if (response.ok) {
+                                    showNotification('Folder opened successfully!');
+                                } else {
+                                    showNotification('Failed to open folder.', true);
+                                }
+                            });
+                    };
+                } else {
+                    // Fallback if no path is provided
+                    console.log('Showing generic completion modal (no video path).');
+                    videoInfo.textContent = 'Processing complete. Check the downloads folder.';
+                    videoPlayer.style.display = 'none';
+                    downloadBtn.style.display = 'none';
+                    openFolderBtn.style.display = 'none';
+                }
+
+                // Load and show the modal
+                videoPlayer.load();
+                modal.style.display = 'block';
+            }
+
+            function closeCompletionModal() {
+                const modal = document.getElementById('completionModal');
+                const videoPlayer = document.getElementById('completionVideoPlayer');
+                if (modal && videoPlayer) {
+                    modal.style.display = 'none';
+                    videoPlayer.pause();
+                    videoPlayer.currentTime = 0;
+                }
+            }
+
+            // --- Event Listeners ---
+
+            // Upload Button
+            if (uploadBtn && videoFileInput) {
+                uploadBtn.addEventListener('click', async () => {
+                    const file = videoFileInput.files[0];
+                    if (!file) {
+                        showNotification('Please select a video file to upload.', true);
+                        return;
+                    }
+                    const formData = new FormData();
+                    formData.append('video', file);
+
+                    try {
+                        showNotification('Uploading video...', false);
+                        showProgressContainer();
+                        
+                        // Replace button with progress bar for upload
+                        const uploadProgress = document.getElementById('uploadProgress');
+                        const uploadProgressBar = document.getElementById('uploadProgressBar');
+                        const uploadProgressText = document.getElementById('uploadProgressText');
+                        const uploadButton = document.getElementById('uploadBtn');
+                        
+                        if (uploadProgress && uploadButton) {
+                            uploadButton.style.display = 'none'; // Hide the button
+                            uploadProgress.style.display = 'block'; // Show progress bar
+                            uploadProgressText.style.left = '4px'; // Reset position
+                            uploadProgressText.textContent = '0%';
+                        }
+                        
+                        // Connect to progress stream
+                        const progressStream = connectToProgressStream();
+                        
+                        const response = await fetch('/upload', {
+                            method: 'POST',
+                            body: formData
+                        });
+                        
+                        if (response.ok) {
+                            showNotification('Upload completed! Check progress below.', false);
+                        } else {
+                            const errorData = await response.json();
+                            const errorMessage = errorData.message || 'Upload failed';
+                            
+                            // Show user-friendly error message inline
+                            addProgressItem(`❌ Upload failed: ${errorMessage}`, 'warning');
+                            const progressItems = document.querySelectorAll('.progress-item-container');
+                            const lastProgressItem = progressItems.length > 0 ? progressItems[progressItems.length - 1] : null;
+                            if (lastProgressItem) {
+                                const progressBar = lastProgressItem.querySelector('.inline-progress-fill');
+                                const progressText = lastProgressItem.querySelector('.inline-progress-text');
+                                if (progressBar && progressText) {
+                                    progressBar.style.width = '100%';
+                                    progressBar.style.backgroundColor = '#e74c3c'; // Red for error
+                                    progressText.textContent = 'Failed';
+                                }
+                            }
+                            progressStream.close();
+                        }
+                    } catch (error) {
+                        console.error('A critical error occurred during file upload:', error);
+                        showNotification('An error occurred during upload. Check the browser console.', true);
+                    }
+                });
+            } else {
+                console.error('Upload button or video file input not found.');
+            }
+
+            // YouTube Download Button
+            const youtubeDownloadBtn = document.getElementById('youtubeDownloadBtn');
+            const youtubeUrlInput = document.getElementById('youtubeUrlInput');
+            
+            if (youtubeDownloadBtn && youtubeUrlInput) {
+                youtubeDownloadBtn.addEventListener('click', async () => {
+                    const url = youtubeUrlInput.value.trim();
+                    if (!url) {
+                        showNotification('Please enter a YouTube URL.', true);
+                        return;
+                    }
+                    
+                    // Basic YouTube URL validation
+                    if (!url.includes('youtube.com') && !url.includes('youtu.be')) {
+                        showNotification('Please enter a valid YouTube URL.', true);
+                        return;
+                    }
+
+                    try {
+                        showNotification('Starting YouTube download...', false);
+                        showProgressContainer();
+                        
+                        // Replace button with progress bar for YouTube
+                        const youtubeProgress = document.getElementById('youtubeProgress');
+                        const youtubeProgressBar = document.getElementById('youtubeProgressBar');
+                        const youtubeProgressText = document.getElementById('youtubeProgressText');
+                        const youtubeButton = document.getElementById('youtubeDownloadBtn');
+                        
+                        if (youtubeProgress && youtubeButton) {
+                            youtubeButton.style.display = 'none'; // Hide the button
+                            youtubeProgress.style.display = 'block'; // Show progress bar
+                            youtubeProgressText.style.left = '4px'; // Reset position
+                            youtubeProgressText.textContent = '0%';
+                        }
+                        
+                        // Connect to progress stream
+                        const progressStream = connectToProgressStream();
+                        
+                        const response = await fetch('/youtube/download', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ url })
+                        });
+                        
+                        const result = await response.json();
+                        
+                        if (response.ok) {
+                            showNotification('YouTube download and automation started!', false);
+                            youtubeUrlInput.value = ''; // Clear the input
+                        } else {
+                            const errorMessage = result.message || 'Download failed';
+                            
+                            // Show user-friendly error message
+                            if (errorMessage.includes('All editors are currently busy')) {
+                                showNotification('⚠️ All editors are busy. Please wait and try again.', true);
+                                addProgressItem('⚠️ All editors are currently busy. Please wait for current automation to finish.', 'warning');
+                            } else {
+                                showNotification(`❌ Download failed: ${errorMessage}`, true);
+                                addProgressItem(`❌ Download failed: ${errorMessage}`, 'warning');
+                            }
+                            progressStream.close();
+                        }
+                    } catch (error) {
+                        console.error('Error during YouTube download:', error);
+                        showNotification('An error occurred during download. Check the browser console.', true);
+                    }
+                });
+                
+                // Allow Enter key to trigger download
+                youtubeUrlInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        youtubeDownloadBtn.click();
+                    }
+                });
+            } else {
+                console.error('YouTube download button or URL input not found.');
+            }
+
+            // Login Modal
+            if (loginButton && modal && closeButton) {
+                loginButton.addEventListener('click', () => { modal.style.display = 'block'; });
+                closeButton.addEventListener('click', () => { modal.style.display = 'none'; });
+                window.addEventListener('click', (event) => {
+                    if (event.target == modal) {
+                        modal.style.display = 'none';
+                    }
+                });
+            }
+
+            // Save Credentials
+            if (saveBtn && emailInput && passwordInput) {
+                saveBtn.addEventListener('click', () => {
+                    const email = emailInput.value;
+                    const password = passwordInput.value;
+                    if (email && password) {
+                        localStorage.setItem('capcut_email', email);
+                        localStorage.setItem('capcut_password', password);
+                        showNotification('Login details saved!');
+                    } else {
+                        showNotification('Please enter both email and password to save.', true);
+                    }
+                });
+            }
+
+            // Login Form Submission
+            if (loginForm) {
+                loginForm.addEventListener('submit', async (event) => {
+                    event.preventDefault();
+                    const email = emailInput.value;
+                    const password = passwordInput.value;
+                    if (!email || !password) {
+                        showNotification('Please enter both email and password.', true);
+                        return;
+                    }
+                    try {
+                        const response = await fetch('/login', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ email, password })
+                        });
+                        if (response.ok) {
+                            const result = await response.text();
+                            showNotification('Login process started successfully!');
+                            modal.style.display = 'none';
+                            checkAndDisplayStatus(); // Re-check status after login
+                        } else {
+                            const errorText = await response.text();
+                            showNotification(`Login failed: ${errorText}`, true);
+                        }
+                    } catch (error) {
+                        console.error('Error during login:', error);
+                        showNotification('An error occurred during login. Check the console.', true);
+                    }
+                });
+            }
+
+            // --- Initializations ---
+            const savedEmail = localStorage.getItem('capcut_email');
+            const savedPassword = localStorage.getItem('capcut_password');
+            if (savedEmail) emailInput.value = savedEmail;
+            if (savedPassword) passwordInput.value = savedPassword;
+        });
+    </script>
+</body>
+</html>

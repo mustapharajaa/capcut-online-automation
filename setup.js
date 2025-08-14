@@ -4,6 +4,19 @@ const https = require('https');
 const { execSync } = require('child_process');
 const os = require('os');
 
+// Simple zip extraction function for Windows
+function extractZip(zipPath, extractPath) {
+    try {
+        // Use PowerShell to extract zip on Windows
+        const command = `powershell -command "Expand-Archive -Path '${zipPath}' -DestinationPath '${extractPath}' -Force"`;
+        execSync(command, { stdio: 'inherit' });
+        return true;
+    } catch (error) {
+        console.error('Zip extraction failed:', error.message);
+        return false;
+    }
+}
+
 console.log('🚀 CapCut Automation Setup');
 console.log('========================');
 
@@ -56,11 +69,64 @@ async function setupWindows() {
             console.log('✅ yt-dlp already exists');
         }
         
-        // Download FFmpeg (simplified - user can manually download if needed)
-        console.log('📋 FFmpeg setup:');
-        console.log('   Please download FFmpeg from: https://ffmpeg.org/download.html#build-windows');
-        console.log(`   Extract to: ${ffmpegDir}`);
-        console.log('   Or use the @ffmpeg-installer/ffmpeg package (already in dependencies)');
+        // Download FFmpeg directly
+        if (!fs.existsSync(ffmpegPath)) {
+            console.log('📥 Downloading FFmpeg for Windows...');
+            const ffmpegZipPath = path.join(binDir, 'ffmpeg.zip');
+            
+            try {
+                // Download FFmpeg essentials build
+                await downloadFile('https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip', ffmpegZipPath);
+                
+                console.log('📦 Extracting FFmpeg...');
+                const tempExtractDir = path.join(binDir, 'temp_ffmpeg');
+                
+                // Extract zip file
+                if (extractZip(ffmpegZipPath, tempExtractDir)) {
+                    console.log('✅ FFmpeg extracted successfully');
+                    
+                    // Find the ffmpeg.exe in the extracted folder structure
+                    const findFFmpegExe = (dir) => {
+                        const items = fs.readdirSync(dir);
+                        for (const item of items) {
+                            const fullPath = path.join(dir, item);
+                            if (fs.statSync(fullPath).isDirectory()) {
+                                const result = findFFmpegExe(fullPath);
+                                if (result) return result;
+                            } else if (item === 'ffmpeg.exe') {
+                                return fullPath;
+                            }
+                        }
+                        return null;
+                    };
+                    
+                    const ffmpegExePath = findFFmpegExe(tempExtractDir);
+                    if (ffmpegExePath) {
+                        // Create ffmpeg directory and copy the executable
+                        if (!fs.existsSync(ffmpegDir)) {
+                            fs.mkdirSync(ffmpegDir, { recursive: true });
+                        }
+                        fs.copyFileSync(ffmpegExePath, ffmpegPath);
+                        console.log('✅ FFmpeg installed successfully');
+                        
+                        // Clean up temporary files
+                        fs.rmSync(tempExtractDir, { recursive: true, force: true });
+                        fs.unlinkSync(ffmpegZipPath);
+                        console.log('🧹 Cleaned up temporary files');
+                    } else {
+                        console.log('⚠️  Could not find ffmpeg.exe in extracted files');
+                    }
+                } else {
+                    console.log('⚠️  Failed to extract FFmpeg zip file');
+                }
+                
+            } catch (error) {
+                console.log('⚠️  FFmpeg download failed, using npm package fallback');
+                console.log('   Using @ffmpeg-installer/ffmpeg package instead');
+            }
+        } else {
+            console.log('✅ FFmpeg already exists');
+        }
         
         // Create .env file
         const envContent = `# CapCut Automation Environment Configuration

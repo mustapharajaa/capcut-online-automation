@@ -81,6 +81,7 @@ function downloadWithFFmpegMerge(url, finalOutputPath, infoJsonPath, progressCal
         '--format', process.env.DOWNLOAD_FORMAT || 'bestvideo[height<=1080]+bestaudio/best[height<=1080]',
         '--output', '-',        // Output to stdout (pipe to FFmpeg)
         '--no-playlist',
+        '--ffmpeg-location', FFMPEG_PATH, // Tell yt-dlp where FFmpeg is
         url
     ];
 
@@ -96,6 +97,7 @@ function downloadWithFFmpegMerge(url, finalOutputPath, infoJsonPath, progressCal
         '--write-info-json',
         '--skip-download',      // Only get info, don't download
         '--output', infoJsonPath.replace('.info.json', ''),
+        '--ffmpeg-location', FFMPEG_PATH, // Tell yt-dlp where FFmpeg is
         url
     ];
 
@@ -445,6 +447,7 @@ function downloadWithStandardMethod(url, timestamp, progressCallback, resolve, r
         '--output', outputTemplate,
         '--no-playlist',
         '--write-info-json',
+        '--ffmpeg-location', FFMPEG_PATH, // Tell yt-dlp where FFmpeg is
         url
     ];
 

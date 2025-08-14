@@ -179,7 +179,7 @@ async function uploadVideo(page, filePath) {
 
         // --- Add video to timeline ---
         console.log('Getting a fresh handle to the media item...');
-        const freshVideoTextElement = await page.waitForSelector(`xpath/${videoElementXPath}`, { timeout: 10000 });
+        const freshVideoTextElement = await page.waitForSelector(`xpath/${videoElementXPath}`, { timeout: 150000 }); // 2.5 minutes
         const freshMediaItemContainer = await freshVideoTextElement.evaluateHandle(node => node.parentElement);
 
         console.log('Clicking the media item to add it to the timeline...');

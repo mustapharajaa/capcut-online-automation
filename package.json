@@ -4,7 +4,9 @@
   "description": "A Node.js app to automate CapCut Web using Puppeteer.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "setup": "node setup.js",
+    "postinstall": "node setup.js"
   },
   "keywords": [
     "capcut",

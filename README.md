@@ -5,10 +5,19 @@ Automated YouTube video processing pipeline that downloads videos and processes 
 ## 🚀 Quick Setup
 
 ### Windows (Recommended)
-```bash
+```powershell
+# Clone the repository
 git clone https://github.com/mustapharajaa/capcut-online-automation.git
 cd capcut-online-automation
-setup.bat
+
+# Run automated setup
+.\setup.bat
+
+# If FFmpeg installation fails, fix the path:
+powershell -Command "(Get-Content .env) -replace 'FFMPEG_PATH=.*bin\\ffmpeg\\ffmpeg.exe', 'FFMPEG_PATH=' + (Get-ChildItem node_modules\@ffmpeg-installer\win32-x64\ffmpeg.exe).FullName | Set-Content .env"
+
+# Start the server
+npm start
 ```
 
 ### Linux/VPS
@@ -17,6 +26,7 @@ git clone https://github.com/mustapharajaa/capcut-online-automation.git
 cd capcut-online-automation
 chmod +x setup.sh
 ./setup.sh
+npm start
 ```
 
 ### Manual Setup
@@ -123,9 +133,42 @@ FFMPEG_PATH=/usr/bin/ffmpeg
 ### Common Issues:
 
 1. **"yt-dlp not found"**: Run `node setup.js` again
-2. **"FFmpeg not found"**: Install FFmpeg manually or check paths
-3. **Browser not found**: Install Chrome or set `CHROME_PATH` in environment
-4. **Permission errors**: Run as administrator (Windows) or use `sudo` (Linux)
+2. **"FFmpeg not found"** or **FFmpeg extraction failed**: 
+   ```powershell
+   # Fix FFmpeg path to use npm package
+   powershell -Command "(Get-Content .env) -replace 'FFMPEG_PATH=.*bin\\ffmpeg\\ffmpeg.exe', 'FFMPEG_PATH=' + (Get-ChildItem node_modules\@ffmpeg-installer\win32-x64\ffmpeg.exe).FullName | Set-Content .env"
+   ```
+3. **PowerShell execution policy**: If `.\setup.bat` fails, run:
+   ```powershell
+   Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+   .\setup.bat
+   ```
+4. **"End of Central Directory record could not be found"**: FFmpeg zip corrupted, use npm package fallback (command above)
+5. **Browser not found**: Install Chrome or set `CHROME_PATH` in environment
+6. **Permission errors**: Run as administrator (Windows) or use `sudo` (Linux)
+
+### Manual FFmpeg Installation:
+If automatic FFmpeg download fails:
+```powershell
+# Download FFmpeg manually
+# 1. Go to: https://github.com/BtbN/FFmpeg-Builds/releases
+# 2. Download: ffmpeg-master-latest-win64-gpl.zip
+# 3. Extract ffmpeg.exe to: bin\ffmpeg\ffmpeg.exe
+# Or use the npm package (recommended):
+powershell -Command "(Get-Content .env) -replace 'FFMPEG_PATH=.*', 'FFMPEG_PATH=' + (Get-ChildItem node_modules\@ffmpeg-installer\win32-x64\ffmpeg.exe).FullName | Set-Content .env"
+```
+
+### Verify Installation:
+```powershell
+# Check if yt-dlp works
+.\bin\yt-dlp.exe --version
+
+# Check if FFmpeg works (using npm package)
+node -e "console.log(require('@ffmpeg-installer/ffmpeg').path)"
+
+# Check .env file
+type .env
+```
 
 ### Debug Mode:
 ```bash

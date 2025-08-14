@@ -4,10 +4,10 @@ const fs = require('fs');
 require('dotenv').config();
 
 const UPLOADS_DIR = path.join(__dirname, 'uploads');
-const YtDlpWrap = require('yt-dlp-wrap');
+const YtDlpWrap = require('yt-dlp-wrap').default;
 const ffmpeg = require('@ffmpeg-installer/ffmpeg');
 
-const YT_DLP_PATH = new YtDlpWrap(); 
+const ytDlpWrap = new YtDlpWrap(); 
 const FFMPEG_PATH = ffmpeg.path; 
 
 // Ensure uploads directory exists
@@ -100,7 +100,7 @@ function downloadWithFFmpegMerge(url, finalOutputPath, infoJsonPath, progressCal
     console.log(`Starting real-time merge: yt-dlp ${ytdlpArgs.join(' ')}`);
 
     // First get video info (non-blocking)
-    const infoProcess = YtDlpWrap.spawn(infoArgs, {
+        const infoProcess = ytDlpWrap.spawn(infoArgs, {
         stdio: ['pipe', 'pipe', 'pipe'],
         shell: false,
         windowsHide: true
@@ -111,7 +111,7 @@ function downloadWithFFmpegMerge(url, finalOutputPath, infoJsonPath, progressCal
     });
 
     // Start yt-dlp process that will use FFmpeg internally for real-time merging
-    const ytdlp = YtDlpWrap.spawn(ytdlpArgs, {
+        const ytdlp = ytDlpWrap.spawn(ytdlpArgs, {
         stdio: ['pipe', 'pipe', 'pipe'],
         shell: false,
         windowsHide: true
@@ -447,7 +447,7 @@ function downloadWithStandardMethod(url, timestamp, progressCallback, resolve, r
     console.log(`Executing: yt-dlp ${args.join(' ')}`);
 
     // Spawn yt-dlp process
-    const ytDlpProcess = YtDlpWrap.spawn(args, {
+        const ytDlpProcess = ytDlpWrap.spawn(args, {
         stdio: ['pipe', 'pipe', 'pipe'],
         shell: false,
         windowsHide: true
@@ -713,7 +713,7 @@ async function getVideoInfo(url) {
             '--no-playlist'
         ];
 
-        const ytdlp = YtDlpWrap.spawn(args, {
+                const ytdlp = ytDlpWrap.spawn(args, {
             stdio: ['pipe', 'pipe', 'pipe'],
             shell: true
         });

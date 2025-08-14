@@ -131,7 +131,8 @@ function downloadWithFFmpegMerge(url, finalOutputPath, infoJsonPath, progressCal
     const ffmpegArgs = [
         '-i', 'pipe:0',        // Input from stdin (yt-dlp output)
         '-c', 'copy',           // Copy streams without re-encoding
-        '-movflags', 'faststart', // Optimize for web playback
+        '-strict', '-2',        // Allow experimental codecs (Opus in MP4)
+        '-movflags', 'faststart', // Optimize for web playbook
         '-avoid_negative_ts', 'make_zero', // Fix timestamp issues
         '-fflags', '+genpts',   // Generate presentation timestamps
         '-max_muxing_queue_size', '1024', // Increase muxing queue for long videos

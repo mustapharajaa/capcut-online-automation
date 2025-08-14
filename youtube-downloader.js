@@ -81,9 +81,15 @@ function downloadWithFFmpegMerge(url, finalOutputPath, infoJsonPath, progressCal
         '--format', process.env.DOWNLOAD_FORMAT || 'bestvideo[height<=1080]+bestaudio/best[height<=1080]',
         '--output', '-',        // Output to stdout (pipe to FFmpeg)
         '--no-playlist',
-        '--ffmpeg-location', FFMPEG_PATH, // Tell yt-dlp where FFmpeg is
         url
     ];
+
+    // Add cookies if youtube-cookies.txt exists
+    const cookiesPath = path.join(__dirname, 'youtube-cookies.txt');
+    if (fs.existsSync(cookiesPath)) {
+        ytdlpArgs.splice(-1, 0, '--cookies', cookiesPath);
+        console.log('🍪 Using YouTube cookies for authentication');
+    }
 
     // Also create info.json file separately
     const infoArgs = [
@@ -92,6 +98,11 @@ function downloadWithFFmpegMerge(url, finalOutputPath, infoJsonPath, progressCal
         '--output', infoJsonPath.replace('.info.json', ''),
         url
     ];
+
+    // Add cookies to info args too
+    if (fs.existsSync(cookiesPath)) {
+        infoArgs.splice(-1, 0, '--cookies', cookiesPath);
+    }
 
     console.log(`Getting video info: ${YTDLP_PATH} ${infoArgs.join(' ')}`);
     console.log(`Starting real-time merge: ${YTDLP_PATH} ${ytdlpArgs.join(' ')}`);
@@ -437,6 +448,13 @@ function downloadWithStandardMethod(url, timestamp, progressCallback, resolve, r
         url
     ];
 
+    // Add cookies if youtube-cookies.txt exists
+    const cookiesPath = path.join(__dirname, 'youtube-cookies.txt');
+    if (fs.existsSync(cookiesPath)) {
+        args.splice(-1, 0, '--cookies', cookiesPath);
+        console.log('🍪 Using YouTube cookies for authentication');
+    }
+
     if (progressCallback) {
         progressCallback('🔍 Starting standard YouTube download (FFmpeg not found)...');
     }
@@ -768,6 +786,13 @@ async function getVideoInfo(url) {
             '--dump-json',
             '--no-playlist'
         ];
+
+        // Add cookies if youtube-cookies.txt exists
+        const cookiesPath = path.join(__dirname, 'youtube-cookies.txt');
+        if (fs.existsSync(cookiesPath)) {
+            args.splice(-1, 0, '--cookies', cookiesPath);
+            console.log('🍪 Using YouTube cookies for video info');
+        }
 
         const ytdlp = spawn(YTDLP_PATH, args, {
             stdio: ['pipe', 'pipe', 'pipe'],

@@ -94,23 +94,42 @@ capcut-online-automation/
 ├── youtube-downloader.js  # YouTube download logic
 ├── timeline_test.js       # CapCut automation
 ├── setup.js              # Automated setup script
+├── youtube-cookies.txt    # YouTube authentication cookies
 └── .env                  # Configuration (auto-generated)
 ```
 
-## ⚙️ Configuration
+## 🔧 Configuration
 
-The `.env` file is automatically created with optimal settings:
+Create a `.env` file in the root directory (automatically created by setup script):
 
-```bash
+```env
 # yt-dlp executable path
 YTDLP_PATH=./bin/yt-dlp.exe
 
-# FFmpeg executable path  
-FFMPEG_PATH=./bin/ffmpeg.exe
+# FFmpeg executable path
+FFMPEG_PATH=./bin/ffmpeg/ffmpeg.exe
 
-# Download quality settings
+# Download settings
+DOWNLOAD_QUALITY=bestvideo[height<=1080]+bestaudio
 DOWNLOAD_FORMAT=bestvideo[height<=1080]+bestaudio/best[height<=1080]
 ```
+
+### 🍪 YouTube Authentication (Required)
+
+YouTube requires authentication to download videos. Export your browser cookies:
+
+#### Method 1: Browser Extension (Recommended)
+1. Install **"Get cookies.txt LOCALLY"** extension for your browser
+2. Go to YouTube and make sure you're logged in
+3. Click the extension icon and export cookies
+4. Save the file as `youtube-cookies.txt` in the project root directory
+
+#### Method 2: Manual Export
+1. Open YouTube in your browser (logged in)
+2. Open Developer Tools (F12)
+3. Go to Application/Storage → Cookies → https://youtube.com
+4. Export all cookies to a Netscape format file
+5. Save as `youtube-cookies.txt` in the project root
 
 ## 🔧 Manual Configuration
 
@@ -132,8 +151,14 @@ FFMPEG_PATH=/usr/bin/ffmpeg
 
 ### Common Issues:
 
-1. **"yt-dlp not found"**: Run `node setup.js` again
-2. **"FFmpeg not found"** or **FFmpeg extraction failed**: 
+1. **"Sign in to confirm you're not a bot"** or **YouTube download fails**: 
+   ```powershell
+   # Missing YouTube cookies - export from browser and save as youtube-cookies.txt
+   # Install "Get cookies.txt LOCALLY" browser extension
+   # Export YouTube cookies and save in project root
+   ```
+2. **"yt-dlp not found"**: Run `node setup.js` again
+3. **"FFmpeg not found"** or **FFmpeg extraction failed**: 
    ```powershell
    # Fix FFmpeg path to use npm package
    powershell -Command "(Get-Content .env) -replace 'FFMPEG_PATH=.*bin\\ffmpeg\\ffmpeg.exe', 'FFMPEG_PATH=' + (Get-ChildItem node_modules\@ffmpeg-installer\win32-x64\ffmpeg.exe).FullName | Set-Content .env"

@@ -29,11 +29,6 @@ debug/
 *.jpg
 *.jpeg
 
-# Sensitive configuration files
-cookies.json
-editors.json
-videos.json
-
 # System files
 .DS_Store
 Thumbs.db

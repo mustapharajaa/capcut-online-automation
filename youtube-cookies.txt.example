@@ -1,0 +1,17 @@
+# Netscape HTTP Cookie File
+# This is a generated file! Do not edit.
+
+# Example YouTube cookies file format
+# Export your actual cookies from browser using "Get cookies.txt LOCALLY" extension
+# Save the exported file as "youtube-cookies.txt" (remove .example extension)
+
+# Format: domain	flag	path	secure	expiration	name	value
+.youtube.com	TRUE	/	TRUE	1234567890	session_token	your_session_token_here
+.youtube.com	TRUE	/	TRUE	1234567890	LOGIN_INFO	your_login_info_here
+.youtube.com	TRUE	/	TRUE	1234567890	VISITOR_INFO1_LIVE	your_visitor_info_here
+
+# IMPORTANT: 
+# 1. This is just an example format
+# 2. Export real cookies from your logged-in YouTube session
+# 3. Rename this file to "youtube-cookies.txt" after adding real cookies
+# 4. Keep your cookies file private and secure

@@ -115,11 +115,38 @@ async function setupWindows() {
                         console.log('🧹 Cleaned up temporary files');
                     } else {
                         console.log('⚠️  Could not find ffmpeg.exe in extracted files');
+                        console.log('🔄 Using npm FFmpeg package as fallback...');
+                        
+                        // Set FFmpeg path to npm package location
+                        const npmFFmpegPath = path.join(__dirname, 'node_modules', '@ffmpeg-installer', 'win32-x64', 'ffmpeg.exe');
+                        if (fs.existsSync(npmFFmpegPath)) {
+                            ffmpegPath = npmFFmpegPath;
+                            console.log('✅ Found npm FFmpeg package');
+                        } else {
+                            console.log('⚠️  npm FFmpeg package not found, will use fallback path in .env');
+                        }
                     }
                 } else {
-                    console.log('⚠️  Failed to extract FFmpeg zip file');
+                    console.log('❌ Failed to extract FFmpeg zip');
+                    console.log('🔄 Using npm FFmpeg package as fallback...');
+                    
+                    // Set FFmpeg path to npm package location
+                    const npmFFmpegPath = path.join(__dirname, 'node_modules', '@ffmpeg-installer', 'win32-x64', 'ffmpeg.exe');
+                    if (fs.existsSync(npmFFmpegPath)) {
+                        ffmpegPath = npmFFmpegPath;
+                        console.log('✅ Using npm FFmpeg package');
+                    } else {
+                        console.log('⚠️  npm FFmpeg package not found, will use fallback path in .env');
+                    }
                 }
                 
+                // Clean up
+                if (fs.existsSync(tempExtractDir)) {
+                    fs.rmSync(tempExtractDir, { recursive: true, force: true });
+                }
+                if (fs.existsSync(ffmpegZipPath)) {
+                    fs.unlinkSync(ffmpegZipPath);
+                }
             } catch (error) {
                 console.log('⚠️  FFmpeg download failed, using npm package fallback');
                 console.log('   Using @ffmpeg-installer/ffmpeg package instead');

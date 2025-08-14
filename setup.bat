@@ -8,6 +8,9 @@ echo.
 echo Installing Node.js dependencies...
 call npm install
 
+echo Installing FFmpeg npm package (fallback for setup)...
+call npm install @ffmpeg-installer/ffmpeg
+
 echo.
 echo Running automated setup...
 node setup.js

@@ -1,20 +1,71 @@
-# Node.js
-node_modules/
-npm-debug.log
-
-# Environment variables
+# Environment variables (contains sensitive paths and configurations)
 .env
+.env.local
+.env.production
 
-# User Data & Sessions
-cookies.json
-videos.json
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Browser data and sessions (contains login sessions)
 puppeteer_data/
+.puppeteer_cache/
 
-# Media & Debugging
+# Downloaded and uploaded files
 uploads/
 downloads/
-debug/
-*.log
 *.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+*.info.json
+
+# Debug screenshots and logs
+debug/
 *.png
-*.zip
+*.jpg
+*.jpeg
+
+# Sensitive configuration files
+cookies.json
+editors.json
+videos.json
+
+# System files
+.DS_Store
+Thumbs.db
+*.log
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Build outputs
+dist/
+build/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# FFmpeg and yt-dlp binaries (if stored locally)
+bin/
+ffmpeg.exe
+yt-dlp.exe

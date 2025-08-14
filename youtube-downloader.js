@@ -4,10 +4,8 @@ const fs = require('fs');
 require('dotenv').config();
 
 const UPLOADS_DIR = path.join(__dirname, 'uploads');
-const YtDlpWrap = require('yt-dlp-wrap');
-const ffmpeg = require('@ffmpeg-installer/ffmpeg');
-
-const FFMPEG_PATH = ffmpeg.path; 
+const YTDLP_PATH = process.env.YTDLP_PATH || 'yt-dlp';
+const FFMPEG_PATH = process.env.FFMPEG_PATH || 'ffmpeg';
 
 // Ensure uploads directory exists
 if (!fs.existsSync(UPLOADS_DIR)) {
@@ -95,11 +93,11 @@ function downloadWithFFmpegMerge(url, finalOutputPath, infoJsonPath, progressCal
         url
     ];
 
-    console.log(`Getting video info: yt-dlp ${infoArgs.join(' ')}`);
-    console.log(`Starting real-time merge: yt-dlp ${ytdlpArgs.join(' ')}`);
+    console.log(`Getting video info: ${YTDLP_PATH} ${infoArgs.join(' ')}`);
+    console.log(`Starting real-time merge: ${YTDLP_PATH} ${ytdlpArgs.join(' ')}`);
 
     // First get video info (non-blocking)
-            const infoProcess = YtDlpWrap.spawn(infoArgs, {
+    const infoProcess = spawn(YTDLP_PATH, infoArgs, {
         stdio: ['pipe', 'pipe', 'pipe'],
         shell: false,
         windowsHide: true
@@ -110,7 +108,7 @@ function downloadWithFFmpegMerge(url, finalOutputPath, infoJsonPath, progressCal
     });
 
     // Start yt-dlp process that will use FFmpeg internally for real-time merging
-            const ytdlp = YtDlpWrap.spawn(ytdlpArgs, {
+    const ytdlp = spawn(YTDLP_PATH, ytdlpArgs, {
         stdio: ['pipe', 'pipe', 'pipe'],
         shell: false,
         windowsHide: true
@@ -443,10 +441,10 @@ function downloadWithStandardMethod(url, timestamp, progressCallback, resolve, r
         progressCallback('🔍 Starting standard YouTube download (FFmpeg not found)...');
     }
 
-    console.log(`Executing: yt-dlp ${args.join(' ')}`);
+    console.log(`Executing: ${YTDLP_PATH} ${args.join(' ')}`);
 
     // Spawn yt-dlp process
-            const ytDlpProcess = YtDlpWrap.spawn(args, {
+    const ytdlp = spawn(YTDLP_PATH, args, {
         stdio: ['pipe', 'pipe', 'pipe'],
         shell: false,
         windowsHide: true
@@ -554,6 +552,65 @@ function downloadWithStandardMethod(url, timestamp, progressCallback, resolve, r
                             progressCallback('📝 Reading video metadata...');
                         }
                         
+                        async function downloadYouTubeVideo(url, progressCallback) {
+                            return new Promise(async (resolve, reject) => {
+                                try {
+                                    const timestamp = Date.now();
+
+                                    // Get video metadata first to get the title for the filename
+                                    console.log('Fetching video metadata...');
+                                    const metadata = await ytDlpWrap.getVideoInfo(url);
+                                    const sanitizedTitle = sanitizeFilename(metadata.title);
+
+                                    const outputFilename = `${timestamp}_${sanitizedTitle}.mp4`;
+                                    const outputPath = path.join(UPLOADS_DIR, outputFilename);
+                                    const infoJsonPath = path.join(UPLOADS_DIR, `${timestamp}_${sanitizedTitle}.info.json`);
+
+                                    // Save the metadata we already fetched to the .info.json file
+                                    fs.writeFileSync(infoJsonPath, JSON.stringify(metadata, null, 2));
+                                    console.log(`Saved .info.json to ${infoJsonPath}`);
+
+                                    const ytdlpArgs = [
+                                        '--format', 'bestvideo[height<=1080]+bestaudio/best[height<=1080]',
+                                        '--output', outputPath,
+                                        '--no-playlist',
+                                        '--merge-output-format', 'mp4',
+                                        url
+                                    ];
+
+                                    console.log(`Starting download: yt-dlp ${ytdlpArgs.join(' ')}`);
+                                    if (progressCallback) progressCallback({ message: 'Starting download...' });
+
+                                    ytDlpWrap.exec(ytdlpArgs)
+                                        .on('progress', (progress) => {
+                                            const percent = progress.percent ? progress.percent.toFixed(1) : 0;
+                                            const message = `Downloading... ${percent}% at ${progress.currentSpeed || 'N/A'}`;
+                                            if (progressCallback) progressCallback({ message: message, progress: percent });
+                                        })
+                                        .on('ytDlpEvent', (eventType, eventData) => {
+                                            console.log(`[${eventType}] ${eventData}`);
+                                            if (progressCallback) progressCallback({ message: `[${eventType}] ${eventData}` });
+                                        })
+                                        .on('error', (error) => {
+                                            console.error('Error during download:', error);
+                                            if (progressCallback) progressCallback({ message: `Error: ${error.message}` });
+                                            reject(error);
+                                        })
+                                        .on('close', () => {
+                                            console.log(`Download finished: ${outputPath}`);
+                                            updateVideosJson(sanitizedTitle, metadata.description, 'downloaded', timestamp, outputFilename);
+                                            if (progressCallback) progressCallback({ message: `DOWNLOADED: ${outputPath}`, progress: 100, isComplete: true, finalPath: outputPath });
+                                            resolve(outputPath);
+                                        });
+
+                                } catch (error) {
+                                    console.error('An error occurred in downloadYouTubeVideo:', error);
+                                    if (progressCallback) progressCallback({ message: `Fatal Error: ${error.message}` });
+                                    reject(error);
+                                }
+                            });
+                        }
+
                         const infoData = JSON.parse(fs.readFileSync(infoJsonPath, 'utf8'));
                         const videoTitle = infoData.title;
                         
@@ -712,7 +769,7 @@ async function getVideoInfo(url) {
             '--no-playlist'
         ];
 
-                        const ytdlp = YtDlpWrap.spawn(args, {
+        const ytdlp = spawn(YTDLP_PATH, args, {
             stdio: ['pipe', 'pipe', 'pipe'],
             shell: true
         });

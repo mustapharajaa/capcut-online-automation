@@ -9,13 +9,6 @@ const downloadsDir = path.join(__dirname, 'downloads');
 // Create router for API routes
 const router = express.Router();
 
-// Ensure videos.json exists to prevent startup errors
-const VIDEOS_JSON_PATH = path.join(__dirname, 'videos.json');
-if (!fs.existsSync(VIDEOS_JSON_PATH)) {
-    console.log('📝 videos.json not found. Creating a new one.');
-    fs.writeFileSync(VIDEOS_JSON_PATH, JSON.stringify({ videos: [] }, null, 2), 'utf8');
-}
-
 /**
  * Determine video processing status based on files present
  * @param {string} baseName - Base filename without extension

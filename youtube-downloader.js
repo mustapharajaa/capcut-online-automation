@@ -4,8 +4,11 @@ const fs = require('fs');
 require('dotenv').config();
 
 const UPLOADS_DIR = path.join(__dirname, 'uploads');
-const YTDLP_PATH = process.env.YTDLP_PATH || 'yt-dlp';
-const FFMPEG_PATH = process.env.FFMPEG_PATH || 'ffmpeg';
+const YtDlpWrap = require('yt-dlp-wrap');
+const ffmpeg = require('@ffmpeg-installer/ffmpeg');
+
+const YT_DLP_PATH = new YtDlpWrap(); 
+const FFMPEG_PATH = ffmpeg.path; 
 
 // Ensure uploads directory exists
 if (!fs.existsSync(UPLOADS_DIR)) {
@@ -93,11 +96,11 @@ function downloadWithFFmpegMerge(url, finalOutputPath, infoJsonPath, progressCal
         url
     ];
 
-    console.log(`Getting video info: ${YTDLP_PATH} ${infoArgs.join(' ')}`);
-    console.log(`Starting real-time merge: ${YTDLP_PATH} ${ytdlpArgs.join(' ')}`);
+    console.log(`Getting video info: yt-dlp ${infoArgs.join(' ')}`);
+    console.log(`Starting real-time merge: yt-dlp ${ytdlpArgs.join(' ')}`);
 
     // First get video info (non-blocking)
-    const infoProcess = spawn(YTDLP_PATH, infoArgs, {
+    const infoProcess = YtDlpWrap.spawn(infoArgs, {
         stdio: ['pipe', 'pipe', 'pipe'],
         shell: false,
         windowsHide: true
@@ -108,7 +111,7 @@ function downloadWithFFmpegMerge(url, finalOutputPath, infoJsonPath, progressCal
     });
 
     // Start yt-dlp process that will use FFmpeg internally for real-time merging
-    const ytdlp = spawn(YTDLP_PATH, ytdlpArgs, {
+    const ytdlp = YtDlpWrap.spawn(ytdlpArgs, {
         stdio: ['pipe', 'pipe', 'pipe'],
         shell: false,
         windowsHide: true
@@ -441,10 +444,10 @@ function downloadWithStandardMethod(url, timestamp, progressCallback, resolve, r
         progressCallback('🔍 Starting standard YouTube download (FFmpeg not found)...');
     }
 
-    console.log(`Executing: ${YTDLP_PATH} ${args.join(' ')}`);
+    console.log(`Executing: yt-dlp ${args.join(' ')}`);
 
     // Spawn yt-dlp process
-    const ytdlp = spawn(YTDLP_PATH, args, {
+    const ytDlpProcess = YtDlpWrap.spawn(args, {
         stdio: ['pipe', 'pipe', 'pipe'],
         shell: false,
         windowsHide: true
@@ -710,7 +713,7 @@ async function getVideoInfo(url) {
             '--no-playlist'
         ];
 
-        const ytdlp = spawn(YTDLP_PATH, args, {
+        const ytdlp = YtDlpWrap.spawn(args, {
             stdio: ['pipe', 'pipe', 'pipe'],
             shell: true
         });

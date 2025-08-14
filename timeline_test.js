@@ -15,8 +15,9 @@ function broadcastProgress(message) {
 
 // Try multiple common Chrome paths
 const POSSIBLE_CHROME_PATHS = [
-    'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
-    'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
+    '/usr/bin/google-chrome', // Standard Linux path
+    'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe', // Standard Windows path
+    'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe', // 32-bit Windows path
     process.env.CHROME_PATH, // Allow override via environment variable
     null // Let Puppeteer find Chrome automatically
 ];
@@ -400,8 +401,12 @@ async function runAutomationPipeline(videoPath) {
             
             const launchOptions = {
                 userDataDir: USER_DATA_DIR,
-                headless: false,
-                args: ['--start-maximized', '--disable-blink-features=AutomationControlled'],
+                headless: false, // Set to false to see the browser on your PC
+                args: [
+                    '--start-maximized',
+                    '--disable-blink-features=AutomationControlled',
+                    '--no-sandbox' // Required for running as root on Linux
+                ],
                 protocolTimeout: 1200000 // 20 minutes timeout for long video processing
             };
             

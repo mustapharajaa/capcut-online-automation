@@ -14,6 +14,7 @@ puppeteer_data/
 .puppeteer_cache/
 
 # Downloaded and uploaded files
+vps-ok
 uploads/
 downloads/
 *.mp4
